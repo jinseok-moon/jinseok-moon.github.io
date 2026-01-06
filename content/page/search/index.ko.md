@@ -8,6 +8,7 @@ outputs:
 menu:
     main:
         weight: 4
-        params: 
+        params:
             icon: search
+translationKey: "_ko_redirect_search"
 ---

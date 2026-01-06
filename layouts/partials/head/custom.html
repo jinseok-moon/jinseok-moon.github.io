@@ -1,0 +1,19 @@
+{{/*
+Only posts have 1:1 translations (en/ko).
+For all other pages, redirect ko URLs to the default-language (en) URL.
+*/}}
+
+{{- $isSinglePost := and (eq .Kind "page") (eq .Section "post") -}}
+{{- if and (eq .Site.Language.Lang "ko") (not $isSinglePost) -}}
+  {{- $target := replaceRE "^/ko/" "/" .RelPermalink -}}
+  <meta http-equiv="refresh" content="0; url={{ $target }}">
+  <script>
+    (function () {
+      if (typeof window === 'undefined' || !window.location) return;
+      var path = window.location.pathname || '';
+      var target = path.replace(/^\/ko(\/|$)/, '/');
+      if (!target || target === path) return;
+      window.location.replace(target + (window.location.search || '') + (window.location.hash || ''));
+    })();
+  </script>
+{{- end -}}

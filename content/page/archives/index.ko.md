@@ -6,6 +6,7 @@ slug: "archives"
 menu:
     main:
         weight: 3
-        params: 
+        params:
             icon: archives
+translationKey: "_ko_redirect_archives"
 ---

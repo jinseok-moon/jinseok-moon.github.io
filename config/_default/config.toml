@@ -1,10 +1,10 @@
 # Change baseurl before deploy
-baseurl = "https://demo.stack.jimmycai.com"
+baseurl = "https://jinseok-moon.github.io"
 languageCode = "en-us"
-title = "Hugo Theme Stack Starter"
+title = "Jinseok Moon"
 
 # Theme i18n support
-# Available values: en, fr, id, ja, ko, pt-br, zh-cn, zh-tw, es, de, nl, it, th, el, uk, ar
+# Available values: en, ko
 defaultContentLanguage = "en"
 
 # Set hasCJKLanguage to true if DefaultContentLanguage is in [zh-cn ja ko]
@@ -12,7 +12,7 @@ defaultContentLanguage = "en"
 hasCJKLanguage = false
 
 # Change it to your Disqus shortname before using
-disqusShortname = "hugo-theme-stack"
+disqusShortname = "myblog-otcr7pydaj"
 
 [pagination]
-pagerSize = 5
+pagerSize = 10

@@ -1,3 +1,63 @@
 /*
     You can add your own custom styles here.
 */
+
+/* D2Coding webfont (for visitors who don't have it installed locally) */
+@import url("https://cdn.jsdelivr.net/npm/d2coding@1.3.2/d2coding-full.css");
+
+/* Use D2Coding as the site's monospace font */
+:root {
+    --code-font-family: "D2Coding", Menlo, Monaco, Consolas, "Courier New", monospace;
+
+    /* Inline code colors (use theme palette) */
+    --code-text-color: #{nth($defaultTagBackgrounds, 2)};
+    --code-background-color: #{rgba(nth($defaultTagBackgrounds, 1), 0.15)};
+}
+
+[data-scheme="dark"] {
+    --code-text-color: #{nth($defaultTagBackgrounds, 2)};
+    --code-background-color: #{rgba(nth($defaultTagBackgrounds, 2), 0.22)};
+}
+
+/* Code blocks */
+.article-content pre,
+.highlight pre {
+    font-size: 0.95em;
+    line-height: 1.45;
+}
+
+/* Word-wrap long lines in fenced code blocks (avoid horizontal scroll) */
+.article-content pre,
+.highlight pre,
+.chroma pre {
+    white-space: pre-wrap;
+    overflow-x: hidden;
+}
+
+.article-content pre code,
+.highlight pre code,
+.chroma pre code {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+/* Safety net: hide Chroma line-number column if it still appears */
+.chroma .lnt,
+.chroma .ln,
+.chroma .lntd:first-child,
+.chroma .lntable td:first-child {
+    display: none;
+}
+
+.chroma .lntable {
+    width: 100%;
+}
+
+/* Default: avoid Stack's full-bleed negative margins for images */
+.article-page .main-article .article-content figure,
+.article-page .main-article .article-content .gallery {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}

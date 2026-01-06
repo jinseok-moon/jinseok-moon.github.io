@@ -1,0 +1,134 @@
+Start building sites … 
+hugo v0.154.2+extended+withdeploy darwin/arm64 BuildDate=2026-01-02T16:08:44Z VendorInfo=Homebrew
+
+INFO  static: syncing static files to / duration 173.875µs
+INFO  build:  step process substep collect files 38 files_total 38 pagesources_total 34 resourcesources_total 4 duration 1.011833ms
+INFO  build:  step process duration 1.055291ms
+DEBUG Set expanded permalink path for page page/archives/index.md to "/archives"
+DEBUG Set expanded permalink path for page page/links/index.md to "/links"
+DEBUG Set expanded permalink path for page page/search/index.md to "/search"
+DEBUG Set expanded permalink path for page post/cuda/archs/index.md to "/p/archs"
+DEBUG Set expanded permalink path for page post/cuda/bank-conflict/index.md to "/p/bank-conflict"
+DEBUG Set expanded permalink path for page post/cuda/cuda-tile/index.md to "/p/cuda-tile"
+DEBUG Set expanded permalink path for page post/cuda/gemm-1/index.md to "/p/gemm-1"
+DEBUG Set expanded permalink path for page post/cuda/gemm-2/index.md to "/p/gemm-2"
+DEBUG Set expanded permalink path for page post/cuda/online-softmax/index.md to "/p/online-softmax"
+DEBUG Set expanded permalink path for page post/cuda/pinned-memory/index.md to "/p/pinned-memory"
+DEBUG Set expanded permalink path for page post/cuda/thread-indexing/index.md to "/p/thread-indexing"
+DEBUG Set expanded permalink path for page post/cuda/triton-kernel-link/index.md to "/p/triton-kernel-link"
+DEBUG Set expanded permalink path for page post/hello-world/index.md to "/p/hello-world"
+DEBUG Set expanded permalink path for page post/image-gallery/index.md to "/p/image-gallery"
+DEBUG Set expanded permalink path for page post/markdown-syntax/index.md to "/p/markdown-syntax-guide"
+DEBUG Set expanded permalink path for page post/math-typesetting/index.md to "/p/math-typesetting"
+DEBUG Set expanded permalink path for page post/shortcodes/index.md to "/p/shortcodes"
+DEBUG Set expanded permalink path for page page/archives/index.ko.md to "/archives"
+DEBUG Set expanded permalink path for page page/links/index.ko.md to "/링크"
+DEBUG Set expanded permalink path for page page/search/index.ko.md to "/search"
+DEBUG Set expanded permalink path for page post/cuda/bank-conflict/index.ko.md to "/p/bank-conflict"
+DEBUG Set expanded permalink path for page post/cuda/cuda-tile/index.ko.md to "/p/cuda-tile"
+DEBUG Set expanded permalink path for page post/cuda/gemm-1/index.ko.md to "/p/gemm-1"
+DEBUG Set expanded permalink path for page post/cuda/gemm-2/index.ko.md to "/p/gemm-2"
+DEBUG Set expanded permalink path for page post/cuda/online-softmax/index.ko.md to "/p/online-softmax"
+DEBUG Set expanded permalink path for page post/cuda/pinned-memory/index.ko.md to "/p/pinned-memory"
+DEBUG Set expanded permalink path for page post/cuda/thread-indexing/index.ko.md to "/p/thread-indexing"
+DEBUG Set expanded permalink path for page post/cuda/triton-kernel-link/index.ko.md to "/p/triton-kernel-link"
+INFO  build:  step assemble duration 3.306ms
+WARN  The "gist" shortcode was deprecated in v0.143.0 and will be removed in a future release. See https://gohugo.io/shortcodes/gist for instructions to create a replacement.
+DEBUG Write redirect to main language en: https://jinseok-moon.github.io/
+INFO  build:  step render substep pages site en outputFormat html duration 56.601542ms
+INFO  build:  step render substep pages site en outputFormat json duration 6.128416ms
+INFO  build:  step render substep pages site en outputFormat rss duration 9.345417ms
+INFO  build:  step render substep pages site ko outputFormat html duration 27.328166ms
+INFO  build:  step render substep pages site ko outputFormat json duration 4.784708ms
+INFO  build:  step render substep pages site ko outputFormat rss duration 5.973542ms
+INFO  build:  step render pages 83 content 52 duration 110.509625ms
+INFO  build:  step render deferred count 0 duration 1.125µs
+INFO  build:  step postProcess duration 149.708µs
+
+Template Metrics:
+
+       cumulative       average       maximum      cache  percent  cached  total  
+         duration      duration      duration  potential   cached   count  count  template
+       ----------      --------      --------  ---------  -------  ------  -----  --------
+     255.657086ms   11.115525ms   22.194125ms          0        0       0     23  list.html
+      212.69117ms    8.862132ms   18.775125ms          0        0       0     24  single.html
+     202.252539ms    3.487112ms   13.856708ms         28        0       0     58  _partials/head/head.html
+     126.780668ms    2.185873ms    5.709709ms         88        0       0     58  _partials/sidebar/left.html
+     103.768715ms    1.789115ms   13.000875ms        100        0       0     58  _partials/head/style.html
+      78.863998ms   15.772799ms   40.699791ms          0        0       0      5  index.html
+      66.804374ms    1.484541ms    4.773041ms         51        0       0     45  _partials/sidebar/right.html
+       59.23625ms    1.287744ms     8.05575ms          8        0       0     46  _partials/article/components/header.html
+      46.350684ms      60.273µs    1.883917ms         27        0       0    769  _partials/helper/icon.html
+      44.444874ms    2.222243ms     6.82475ms          0        0       0     20  rss.xml
+      42.979372ms     934.334µs     7.97575ms         18       48      22     46  _partials/article/components/details.html
+       42.02846ms    1.751185ms    3.980083ms          8        0       0     24  _partials/article/article.html
+      37.279332ms     642.747µs    2.105917ms         29        0       0     58  _partials/head/opengraph/include.html
+      36.859251ms     1.67542ms    8.112125ms          9        0       0     22  _partials/article-list/default.html
+      30.246874ms   15.123437ms   22.100916ms          0        0       0      2  404.html
+      22.250208ms     268.074µs    3.150375ms         47        0       0     83  _partials/article-list/compact.html
+      19.086834ms    9.543417ms   10.581875ms          0        0       0      2  archives.html
+      19.051083ms     328.466µs     3.18625ms        100        0       0     58  _partials/footer/include.html
+      18.044425ms     103.703µs     7.77575ms         51       71     124    174  _partials/data/description.html
+      16.853415ms     290.576µs    1.305958ms         32        0       0     58  _partials/head/opengraph/provider/base.html
+      16.660753ms     287.254µs     1.43425ms         33        0       0     58  _partials/head/opengraph/provider/twitter.html
+      16.189291ms     578.188µs     2.19125ms         91        0       0     28  _partials/widget/categories.html
+       14.43596ms     601.498µs    1.973208ms         37        0       0     24  _partials/article/components/related-content.html
+      13.889085ms     239.466µs    2.864125ms        100       97      56     58  _partials/footer/components/script.html
+      10.781749ms     134.771µs    1.142917ms         59        0       0     80  _partials/article-list/tile.html
+      10.280791ms     367.171µs    1.306042ms         92        0       0     28  _partials/widget/archives.html
+      10.239292ms    5.119646ms    6.765125ms          0        0       0      2  page/search.html
+       9.523583ms    4.761791ms    5.340375ms          0        0       0      2  page/search.json
+       8.353626ms     298.343µs     947.667µs         96        0       0     28  _partials/widget/search.html
+       8.028418ms     286.729µs     1.17375ms         90        0       0     28  _partials/widget/tag-cloud.html
+       6.297624ms     224.915µs     989.333µs         50        0       0     28  _partials/pagination.html
+       5.528746ms      11.494µs     230.958µs         92       53     257    481  _partials/helper/image.html
+       5.199958ms     216.664µs    1.372375ms         92        0       0     24  _partials/article/components/footer.html
+       4.490416ms     264.142µs     902.625µs         55        0       0     17  _partials/widget/toc.html
+       3.823956ms     173.816µs      556.75µs        100        0       0     22  _partials/comments/include.html
+       3.179791ms     144.535µs      549.25µs        100        0       0     22  _partials/comments/provider/disqus.html
+       2.226539ms      12.796µs       108.5µs          3       38      66    174  _partials/data/title.html
+       1.362291ms       8.357µs      65.958µs          0        0       0    163  _markup/render-heading.html
+       1.200042ms     600.021µs     609.542µs          0        0       0      2  sitemap.xml
+        509.293µs      10.185µs       37.75µs          0        0       0     50  _markup/render-link.html
+        444.835µs      18.534µs        69.5µs          4        0       0     24  _partials/article/components/content.html
+        422.129µs       7.278µs      92.583µs         85       88      51     58  _partials/footer/footer.html
+        380.876µs       6.566µs      23.166µs        100        0       0     58  _partials/head/colorscheme.html
+        328.208µs       5.658µs        17.5µs        100        0       0     58  _partials/google_analytics.html
+        318.043µs      15.144µs      49.917µs          0        0       0     21  alias.html
+        299.084µs      59.816µs     211.459µs         45        0       0      5  _partials/helper/external.html
+         260.71µs       11.85µs      32.917µs        100        0       0     22  _partials/disqus.html
+        237.833µs     118.916µs     151.708µs          0        0       0      2  _markup/render-image.html
+        203.877µs       8.494µs      150.25µs        100       92      22     24  _partials/article/components/photoswipe.html
+        201.875µs     201.875µs     201.875µs          0        0       0      1  sitemapindex.xml
+        121.415µs       5.058µs      77.208µs         91        0       0     24  _partials/article/components/tags.html
+         83.826µs       1.445µs       34.25µs        100       97      56     58  _partials/footer/components/custom-font.html
+         43.041µs      14.347µs       22.25µs          0        0       0      3  _markup/render-table.html.html
+             43µs        21.5µs       25.75µs        100        0       0      2  _partials/article/components/links.html
+         34.045µs       1.418µs       7.084µs        100       92      22     24  _partials/article/components/mermaid.html
+         31.917µs      10.639µs      12.917µs          0        0       0      3  _markup/render-table.rss.xml
+             31µs          31µs          31µs        100        0       0      1  _partials/article/components/math.html
+         29.667µs      29.667µs      29.667µs          0        0       0      1  _shortcodes/gist.html
+         26.082µs         449ns       3.125µs        100        0       0     58  _partials/head/script.html
+           25.5µs        25.5µs        25.5µs          0        0       0      1  _shortcodes/bilibili.html
+         23.209µs       7.736µs       9.334µs          0        0       0      3  _markup/render-table.json.json
+         22.875µs      22.875µs      22.875µs          0        0       0      1  _shortcodes/quote.html
+         17.919µs         308ns        2.25µs        100        0       0     58  _partials/footer/custom.html
+         17.414µs         300ns       2.084µs        100        0       0     58  _partials/head/custom.html
+         16.458µs      16.458µs      16.458µs          0        0       0      1  _shortcodes/youtube.html
+          6.875µs       6.875µs       6.875µs          0        0       0      1  _shortcodes/video.html
+          2.875µs       2.875µs       2.875µs          0        0       0      1  _shortcodes/tencent.html
+          2.584µs       2.584µs       2.584µs          0        0       0      1  _shortcodes/gitlab.html
+
+INFO  build:  duration 115.253292ms
+
+                  │ EN │ KO 
+──────────────────┼────┼────
+ Pages            │ 49 │ 26 
+ Paginator pages  │  5 │  3 
+ Non-page files   │  4 │  0 
+ Static files     │  1 │  1 
+ Processed images │ 14 │  0 
+ Aliases          │ 15 │  6 
+ Cleaned          │  0 │  0 
+
+Total in 161 ms

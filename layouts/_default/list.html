@@ -1,0 +1,112 @@
+{{ define "main" }}
+    {{- $subsections := .Sections -}}
+    {{- $pagesAll := .Pages -}}
+
+    {{- if eq .Site.Language.Lang "ko" -}}
+        {{- if and (eq .Kind "term") (in (slice "categories" "tags") .Data.Plural) -}}
+            {{- $enSites := where .Site.Sites "Language.Lang" "en" -}}
+            {{- if gt (len $enSites) 0 -}}
+                {{- $enSite := index $enSites 0 -}}
+                {{- $enTermPage := $enSite.GetPage (printf "/%s/%s" .Data.Plural .Data.Term) -}}
+                {{- if $enTermPage -}}
+                    {{- $enPages := where $enTermPage.Pages "Params.hidden" "!=" true -}}
+                    {{- range $enPages -}}
+                        {{- $hasKo := gt (len (where .Translations "Language.Lang" "ko")) 0 -}}
+                        {{- if not $hasKo -}}
+                            {{- $pagesAll = $pagesAll | append . -}}
+                        {{- end -}}
+                    {{- end -}}
+                {{- end -}}
+            {{- end -}}
+
+            {{- $pagesAll = sort $pagesAll "Date" "desc" -}}
+        {{- end -}}
+    {{- end -}}
+
+    <header>
+        <h3 class="section-title">
+            {{ if eq .Parent (.GetPage "/") }}
+                {{ T "list.section" }}
+            {{ else }}
+                {{ .Parent.Title }}
+            {{ end }}
+        </h3>
+
+        <div class="section-card">
+            <div class="section-details">
+                {{- $count := (len .Pages) -}}
+                {{- if and (eq .Site.Language.Lang "ko") (eq .Kind "term") (in (slice "categories" "tags") .Data.Plural) -}}
+                    {{- $count = (len $pagesAll) -}}
+                {{- end -}}
+                <h3 class="section-count">{{ T "list.page" $count }}</h3>
+                <h1 class="section-term">{{ .Title }}</h1>
+                {{ with .Params.description }}
+                    <h2 class="section-description">{{ . }}</h2>
+                {{ end }}
+            </div>
+
+            {{- $image := partialCached "helper/image" (dict "Context" . "Type" "section") .RelPermalink "section" -}}
+            {{ if $image.exists }}
+                <div class="section-image">
+                    {{ if $image.resource }}
+                        {{- $Permalink := $image.resource.RelPermalink -}}
+                        {{- $Width := $image.resource.Width -}}
+                        {{- $Height := $image.resource.Height -}}
+
+                        {{- if (default true .Page.Site.Params.imageProcessing.cover.enabled) -}}
+                            {{- $thumbnail := $image.resource.Fill "120x120" -}}
+                            {{- $Permalink = $thumbnail.RelPermalink -}}
+                            {{- $Width = $thumbnail.Width -}}
+                            {{- $Height = $thumbnail.Height -}}
+                        {{- end -}}
+
+                        <img src="{{ $Permalink }}"
+                            width="{{ $Width }}"
+                            height="{{ $Height }}"
+                            loading="lazy">
+                    {{ else }}
+                        <img src="{{ $image.permalink }}" loading="lazy" />
+                    {{ end }}
+                </div>
+            {{ end }}
+        </div>
+    </header>
+
+    {{- $pages := $pagesAll | complement $subsections -}}
+
+    {{- if eq (len $pages) 0 -}}
+        {{/* If there are no normal pages, display subsections in list style, with pagination */}}
+        {{/* This happens with taxonomies like categories or tags */}}
+        {{- $pages = $subsections -}}
+        {{- $subsections = slice -}}
+    {{- end -}}
+
+    {{- with $subsections -}}
+        <aside>
+            <h2 class="section-title">{{ T "list.subsection" (len $subsections) }}</h2>
+            <div class="subsection-list">
+                <div class="article-list--tile">
+                    {{ range . }}
+                        {{ partial "article-list/tile" (dict "context" . "size" "250x150" "Type" "section") }}
+                    {{ end }}
+                </div>
+            </div>
+        </aside>
+    {{- end -}}
+
+    {{/* List only pages that are not a subsection */}}
+    {{ $paginator := .Paginate $pages }}
+    <section class="article-list--compact">
+        {{ range $paginator.Pages }}
+            {{ partial "article-list/compact" . }}
+        {{ end }}
+    </section>
+
+    {{- partial "pagination.html" . -}}
+
+    {{ partialCached "footer/footer" . }}
+{{ end }}
+
+{{ define "right-sidebar" }}
+    {{ partial "sidebar/right.html" (dict "Context" . "Scope" "homepage") }}
+{{ end }}

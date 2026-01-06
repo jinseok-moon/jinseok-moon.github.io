@@ -1,0 +1,9 @@
+[en]
+languageName = "English"
+languagedirection = "ltr"
+weight = 1
+
+[ko]
+languageName = "Korean"
+languagedirection = "ltr"
+weight = 2

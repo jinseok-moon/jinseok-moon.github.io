@@ -1,0 +1,40 @@
+{{ define "main" }}
+    {{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+    {{ $filtered := where $pages "Params.hidden" "!=" true }}
+
+    {{ if eq .Site.Language.Lang "ko" }}
+        {{- $enSites := where .Site.Sites "Language.Lang" "en" -}}
+        {{- if gt (len $enSites) 0 -}}
+            {{- $enSite := index $enSites 0 -}}
+            {{- $enPages := where $enSite.RegularPages "Type" "in" $enSite.Params.mainSections -}}
+            {{- $enFiltered := where $enPages "Params.hidden" "!=" true -}}
+
+            {{- $extra := slice -}}
+            {{- range $enFiltered -}}
+                {{- $hasKo := gt (len (where .Translations "Language.Lang" "ko")) 0 -}}
+                {{- if not $hasKo -}}
+                    {{- $extra = $extra | append . -}}
+                {{- end -}}
+            {{- end -}}
+
+            {{- $filtered = $filtered | append $extra -}}
+            {{- $filtered = sort $filtered "Date" "desc" -}}
+            <!-- i18n-fallback: ko={{ len (where $pages "Params.hidden" "!=" true) }} extra-en={{ len $extra }} merged={{ len $filtered }} -->
+        {{- end -}}
+    {{ end }}
+
+    {{ $pag := .Paginate ($filtered) }}
+
+    <section class="article-list">
+        {{ range $index, $element := $pag.Pages }}
+            {{ partial "article-list/default" . }}
+        {{ end }}
+    </section>
+
+    {{- partial "pagination.html" . -}}
+    {{- partial "footer/footer" . -}}
+{{ end }}
+
+{{ define "right-sidebar" }}
+    {{ partial "sidebar/right.html" (dict "Context" . "Scope" "homepage") }}
+{{ end }}
