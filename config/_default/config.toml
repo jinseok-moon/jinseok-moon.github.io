@@ -2,6 +2,7 @@
 baseurl = "https://jinseok-moon.github.io"
 languageCode = "en-us"
 title = "Jinseok Moon"
+enableRobotsTXT = true
 
 # Theme i18n support
 # Available values: en, ko
@@ -16,3 +17,4 @@ disqusShortname = "myblog-otcr7pydaj"
 
 [pagination]
 pagerSize = 10
+
