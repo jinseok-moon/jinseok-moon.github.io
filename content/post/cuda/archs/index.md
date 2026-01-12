@@ -17,11 +17,11 @@ In this post we will look at representative GPUs for each architecture—A100, H
 ## A100: Ampere (SM80, 2020)
 Released in 2020, A100 introduced an L1‑bypass path that optimizes copies from DRAM to shared memory (SRAM) by skipping several intermediate stages.
 
-![](image.png)
+![](images/image.png)
 
 These copies are implemented by the `cp.async` PTX instructions and are asynchronous, so we can hide their latency with a software pipeline like the one below.
 
-![](image-1.png)
+![](images/image-1.png)
 
 Software pipelining is a technique that removes dependency chains between successive instructions to better utilize hardware. Memory instructions are handled by the LSU (Load/Store Unit), while matrix multiplications are handled by the compute units (Tensor Cores), so there is no structural hazard between them. However, the following *data* dependency can still be a problem:
 
@@ -51,7 +51,7 @@ Hopper was announced at GTC 2022 and delivers substantially higher performance t
 ### Tensor Memory Accelerator (TMA)
 On Ampere, L1‑bypass improved the performance of memory copies, but programmers still had to compute addresses and strides manually and manage synchronization barriers. To further reduce that burden, NVIDIA introduced the Tensor Memory Accelerator (TMA). With TMA you describe multi‑dimensional tensor layouts and the hardware performs bulk copies accordingly. TMA instructions are launched from a single thread, making much more efficient use of resources.
 
-![](image-2.png)
+![](images/image-2.png)
 
 ### Warp Group Matrix Multiply-Accumulate (WGMMA)
 Up through Ampere, MMA instructions were warp‑local. Hopper goes a step further: WGMMA groups 4 warps together to execute a single matrix multiply‑accumulate instruction, driving the Tensor Cores harder and improving throughput.
@@ -69,7 +69,7 @@ Blackwell, announced at GTC 2024, is the next‑generation GPU architecture. Onc
 - Operand B: SMEM
 - Accumulator: TMEM
 
-![](image-3.png)
+![](images/image-3.png)
 
 Tensor Memory (TMEM) is a new storage structure introduced in Blackwell. Having the accumulator live in TMEM means that UMMA does not need regular registers for its accumulation. In other words, UMMA can run as a single‑thread instruction *without* consuming the usual register budget. Combined with TMA, most of the heavy lifting happens in specialized hardware; the CTA (Cooperative Thread Array, i.e., CUDA block) mainly handles setup and post‑processing.
 

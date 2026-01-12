@@ -35,11 +35,11 @@ We implement a series of kernels and compare their performance. The results are:
 
 ## 0. Naive implementation
 
-![](image.png)
+![](images/image.png)
 
 The most basic implementation assigns one element of $C$ to each thread. Because the matrices are stored in row-major order, this layout forces us to read non-contiguous memory for $B$. The following figure shows how this looks at the warp level.
 
-![](image-1.png)
+![](images/image-1.png)
 
 In this loop structure, when loading $A$ each thread in a warp accesses a different column, so the accesses are not contiguous and cannot be coalesced. Without coalescing, the hardware effectively has to service 32 separate loads per warp, which significantly degrades performance.
 
@@ -47,7 +47,7 @@ When loading $B$, all threads in the warp access the same element, so the hardwa
 
 ### DRAM coalescing
 
-![](image-2.png)
+![](images/image-2.png)
 
 To leverage the warp properly, we need to access contiguous memory as shown above. When loading $A$, we can exploit broadcast to share values within the warp. When loading $B$, each thread in the warp accesses adjacent elements, so the hardware can coalesce the loads into 128‑byte transactions.
 
@@ -94,7 +94,7 @@ $ sudo /usr/local/cuda/bin/ncu --metrics dram__bytes.sum.per_second gemm
 ## 1. SRAM caching
 In the naïve kernel, the same data is fetched from DRAM many times, which is very expensive. According to this [paper](https://arxiv.org/abs/1804.06826), on a V100 the DRAM bandwidth is about 900 GB/s, while the shared-memory (SRAM) bandwidth is around 13,800 GB/s (the exact SRAM number is not officially documented). We therefore want to cache data in shared memory and reuse it as much as possible.
 
-![](image-3.png)
+![](images/image-3.png)
 
 Each block is responsible for a 32×32 tile of $C$. The shaded regions in the figure indicate the corresponding tiles of $A$ and $B$ that must be loaded from DRAM. The `bkIdx` loop walks along $K$ in chunks of `BLOCKSIZE`, loading tiles into shared memory; the `tIter` loop then performs the GEMM on those tiles. Since each thread produces a single output element, it accumulates the partial result into a scalar `sum`, which is finally written back to the appropriate location in $C$.
 
@@ -146,11 +146,11 @@ for each element of $C$, we need approximately `K/16` DRAM loads and `K*2` share
 
 Profiling shows that warps often stall on memory input/output (MIO), confirming that memory traffic is the main bottleneck.
 
-![](image-4.png)
+![](images/image-4.png)
 
 We can alleviate this by reusing each loaded value more aggressively. If each thread computes 8 output elements instead of just 1 (a 1D tiling in the $M$ dimension), the access pattern becomes:
 
-![](image-5.png)
+![](images/image-5.png)
 
 Within a warp, each thread now computes 8 elements of $C$ along the column direction. Recomputing the memory accesses per result under this scheme gives us:
 

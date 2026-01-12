@@ -26,21 +26,6 @@
     line-height: 1.45;
 }
 
-/* Word-wrap long lines in fenced code blocks (avoid horizontal scroll) */
-.article-content pre,
-.highlight pre,
-.chroma pre {
-    white-space: pre-wrap;
-    overflow-x: hidden;
-}
-
-.article-content pre code,
-.highlight pre code,
-.chroma pre code {
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
-    word-break: break-word;
-}
 
 /* Safety net: hide Chroma line-number column if it still appears */
 .chroma .lnt,

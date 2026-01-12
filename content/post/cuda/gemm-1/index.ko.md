@@ -34,11 +34,11 @@ CUDA는 cuBLAS에서 최적화된 GEMM api를 제공한다. 직접 작성한 커
 
 ## 0. Naive implementation
 
-![](image.png)
+![](images/image.png)
 
 가장 기본형태의 연산은 다음과 같이 한개의 스레드가 C의 한 element를 계산하기 위한 연산을 진행하는 것이다. Row-major이기 때문에 B를 load할 때 불연속적인 메모리를 읽어오는 단점이 있다. 이 동작을 warp-level에서의 GEMM operation을 나타내면 아래 그림과 같다.
 
-![](image-1.png)
+![](images/image-1.png)
 
 Loop 구조상 A를 load할 때 스레드들은 비연속적인 column 메모리에 접근하기에 memory coalescing이 불가능하다. Memory coalescing이 불가능하면 결국 warp 내에서 load operation이 32번 발생하게 되고, 이는 성능 크나큰 성능 저하를 가져온다. 
 
@@ -46,7 +46,7 @@ B를 load할 때는 모든 스레드가 같은 값에 접근하기 때문에 war
 
 ### DRAM coalescing
 
-![](image-2.png)
+![](images/image-2.png)
 
 위와 같이 연속적인 메모리를 접근하여서 워프의 이점을 살려야한다. A를 load할때는 memory load - broadcast를 통해서 필요한 모든 데이터가 채워진다. B의 값을 load할때 warp내에서는 인접한 연속적인 메모리를 한번에 불러오므로 memory coalescing이 가능하다.
 
@@ -93,7 +93,7 @@ $ sudo /usr/local/cuda/bin/ncu --metrics dram__bytes.sum.per_second gemm
 ## 1. SRAM caching
 Naive 구현체는 데이터를 반복해서 가져와야하는데, DRAM에서 여러번 가져오는 것은 성능적 손실이 크다. [Paper](https://arxiv.org/abs/1804.06826)에 따르면 V100 기준으로 DRAM bandwidth는 900 GB/s, SRAM bandwidth는 13,800 GB/s 이다 (SRAM bandwidth는 공식적으로 수치가 알려져있지는 않다). SRAM을 활용, 메모리를 최대한 재사용해서 성능을 올려보자. 
 
-![](image-3.png)
+![](images/image-3.png)
 
 각 블록은 32x32 크기를 가지고 C의 결과값을 하나씩 담당해서 연산을 한다. 각 블록에서 필요로 하는 DRAM의 메모리는 위 그림의 빗금친 영역이다. bkIdx loop를 통해서 SRAM에 store할 영역으로 이동하고, tIter loop를 통해서 SRAM load - gemm 연산을 수행한다. 1 result per thread 이므로 결과값은 단일 변수 `sum` 에 누적해서 최종적으로 DRAM C에 저장한다.
 
@@ -144,11 +144,11 @@ SRAM caching을 활용함으로써 성능이 향상되었지만 여전히 cuBLAS
 
 프로파일링 결과를 보면 MIO (Memory Input/Output) 에서 warp stall이 발생하고, 이로 인해 성능이 저하됨을 알 수 있다.
 
-![](image-4.png)
+![](images/image-4.png)
 
 이 문제는 동일한 메모리를 재활용하는 것으로 해결이 가능하다. 1개의 스레드가 8개의 element의 output을 만들어내게끔 타일링을 하면 다음과 같다.
 
-![](image-5.png)
+![](images/image-5.png)
 
 Warp 내에서 하나의 스레드는 column 방향으로 C matrix의 8개의 원소를 계산하게 구현하고, 이를 바탕으로 아까의 메모리 식을 다시 계산해보면,
 

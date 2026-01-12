@@ -11,7 +11,7 @@ showToc: true
 ## Arithmetic Intensity (AI)
 Arithmetic intensity (AI) is defined as the ratio of operations to memory traffic, typically measured in ops/byte. A higher AI means you can perform more computation per byte of data moved. In the previous chapter we used CUDA shared memory (SRAM) and 1D tiling to improve performance, letting each thread compute multiple output elements as shown below. Let’s revisit that setup and think about how AI changes as we extend the algorithm.
 
-![](image.png)
+![](images/image.png)
 
 
 In the original kernel where each thread produced just one result, we needed 17 loads per output. With 1D tiling, that dropped to 11 loads. Moving to 2D tiling reduces it further to 9 loads. This reflects a fundamental property of GEMM: we can dramatically improve efficiency by reusing data in multiple output elements.
@@ -19,7 +19,7 @@ In the original kernel where each thread produced just one result, we needed 17 
 ## 4. SRAM 2d tiling
 Since 2D tiling is more effective, let’s implement it. We introduce a new parameter `TN` and extend the loops accordingly.
 
-![](image-1.png)
+![](images/image-1.png)
 
 ```cpp
   int totalResultsBlocktile = BM * BN;  // 128*128=16384
@@ -69,7 +69,7 @@ void launch_gpu_kernel_4(float *A, float *B, float *C, int M, int N, int K) {
 }
 ```
 
-![](image-2.png)
+![](images/image-2.png)
 
 If we conceptually unroll the `dotIdx` loop, the access pattern looks like the figure above. In total, we only need 16 shared‑memory loads along this path.
 
@@ -80,7 +80,7 @@ If we conceptually unroll the `dotIdx` loop, the access pattern looks like the f
 ## 5. Vectorized SRAM 2d tiling
 On NVIDIA GPUs, the shared‑memory load instruction `LDS` can handle up to 128 bits at a time. This means we can read more data per instruction if we transpose $A$ in the 2D‑tiling kernel so that we can use vectorized loads. By transposing $A$ during the global‑to‑shared copy, we can use `LDS.128` in the same way we already do for $B$.
 
-![](image-3.png)
+![](images/image-3.png)
 
 By using the `float4` vector type, the compiler generates 128‑bit load instructions, which improves performance.
 

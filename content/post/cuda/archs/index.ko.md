@@ -16,11 +16,11 @@ A100, H100 등 각 아키텍쳐의 대표적인 GPU를 통해 알아보자. 텐�
 ## A100: Ampere (SM80, 2020)
 2020년 발표된 GPU로, L1 bypass를 통해서 많은 과정이 생략되면서 DRAM의 값을 Shared Memory (SRAM)에 불러오는 것이 최적화되었다. 
 
-![](image.png)
+![](images/image.png)
 
 `cp.async` ptx로 구성되는 이 메모리 복사는 비동기적으로 일어나기 때문에 다음과 같은 소프트웨어 파이프라인을 통해서 latency를 숨길 수 있다.
 
-![](image-1.png)
+![](images/image-1.png)
 
 소프트웨어 파이프라인은 연속된 명령어의 종속성을 제거해서 하드웨어를 fully utilize 하는 기법이다. 메모리 instruction LSU(Load Store Unit)에서 처리되고, 행렬곱은 연산장치(Tensor Core)에서 처리되므로, 하드웨어 종속성은 문제가 되지 않는다. 하지만 다음과 같은 데이터 종속성은 문제가 될 수 있다.
 
@@ -50,7 +50,7 @@ compute(N-1);
 ### Tensor Memory Accelerator (TMA)
 Ampere에서 L1 bypass를 통한 memory instruction의 성능 개선을 이루었다. 하지만 이를 위해서는 직접 메모리 주소와 stride 계산을 해주고 동기화에 관한 barrier까지 모두 관리해주어야했다. 그래서 NVIDIA는 여기에 만족하지 않고 TMA라는 유닛을 개발했다. TMA를 이용하면 텐서의 정보를 이용해서 대량의 데이터를 복사한다. 또한, 이 TMA instruction은 단일 스레드에서 launch되기 때문에 자원을 더욱 효율적으로 사용가능하다. 
 
-![](image-2.png)
+![](images/image-2.png)
 
 ### Warp Group Matrix Multiply-Accumulate (WGMMA)
 Ampere까지의 mma는 모두 단일 warp 기반 instruction이다. NVIDIA가 극한의 효율을 추구한 결과, 4개의 warp를 묶어서 mma를 처리하도록 만들었다.
@@ -68,7 +68,7 @@ Ampere까지의 mma는 모두 단일 warp 기반 instruction이다. NVIDIA가 �
 - Operand B: SMEM
 - Accumulator: TMEM
 
-![](image-3.png)
+![](images/image-3.png)
 
 Tensor Memory (TMEM), TMEM이 무엇일까? Blackwell에서 새로 생긴 구조로, accumulator가 이곳에 있다는 것은 UMMA에서 데이터 처리를 위해 register가 필요하지 않음을 의미한다. 
 뭐라고? 단일 스레드 실행에, 레지스터까지 필요없다고? TMA까지 활용하면 CTA(Cooperative Thread Array, 쉽게 말하면 CUDA kernel에서의 블록을 의미)에서 할 일은 전/후처리만 남는다. 
