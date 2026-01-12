@@ -1,5 +1,5 @@
 ---
-title: "cuda tile"
+title: "CUDA Tile IR, cuTile Python"
 slug: "cuda-tile"
 date: "2026-01-12"
 categories:
