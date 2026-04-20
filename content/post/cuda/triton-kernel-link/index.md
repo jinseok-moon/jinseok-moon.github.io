@@ -1,5 +1,5 @@
 ---
-title: "Triton kernel linking with CUDA C++"
+title: "Linking a Triton Kernel into CUDA C++ via AOT Compilation"
 slug: "triton-kernel-link"
 date: "2025-07-05"
 draft: false

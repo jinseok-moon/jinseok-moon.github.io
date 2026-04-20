@@ -1,5 +1,5 @@
 ---
-title:  "GPU Architecture w/ LLM"
+title:  "LLM을 위한 NVIDIA GPU 아키텍처 비교: A100, H100, Blackwell"
 slug: "archs"
 categories: 
   - cuda

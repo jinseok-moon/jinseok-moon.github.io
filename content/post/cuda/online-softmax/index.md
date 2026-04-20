@@ -1,5 +1,5 @@
 ---
-title: "Online softmax"
+title: "Online Softmax: The Streaming Algorithm Behind FlashAttention"
 slug: "online-softmax"
 date: "2025-07-12"
 draft: false

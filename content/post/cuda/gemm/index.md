@@ -1,5 +1,5 @@
 ---
-title: "GEMM Optimization"
+title: "CUDA GEMM Kernel Optimization: From Naive to Tiled SGEMM"
 slug: "gemm"
 date: "2026-02-23"
 draft: false

@@ -1,5 +1,5 @@
 ---
-title: "GEMM Optimization"
+title: "CUDA GEMM 커널 최적화: Naive부터 Tiled SGEMM까지"
 slug: "gemm"
 date: "2026-02-23"
 draft: false

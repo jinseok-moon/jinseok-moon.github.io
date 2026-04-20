@@ -1,5 +1,5 @@
 ---
-title: "Shared memory: bank conflicts"
+title: "CUDA Shared Memory Bank Conflicts: Causes and Fixes"
 slug: "bank-conflict"
 date: "2024-12-02"
 draft: false

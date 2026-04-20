@@ -1,5 +1,5 @@
 ---
-title: "Proper thread indexing and memory coalescing"
+title: "CUDA Thread Indexing과 Memory Coalescing 이해하기"
 slug: "thread-indexing"
 date: "2025-07-25"
 draft: false

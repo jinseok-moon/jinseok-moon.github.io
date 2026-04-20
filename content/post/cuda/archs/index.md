@@ -1,5 +1,5 @@
 ---
-title: "GPU architecture w/ LLM"
+title: "NVIDIA GPU Architectures for LLMs: A100, H100, Blackwell Compared"
 slug: "archs"
 date: "2025-11-24"
 draft: false

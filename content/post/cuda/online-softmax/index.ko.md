@@ -1,5 +1,5 @@
 ---
-title: "Online softmax"
+title: "Online Softmax: FlashAttention의 핵심 알고리즘"
 slug: "online-softmax"
 date: "2025-07-12"
 draft: false

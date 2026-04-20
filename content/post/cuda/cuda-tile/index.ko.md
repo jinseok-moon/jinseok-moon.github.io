@@ -1,5 +1,5 @@
 ---
-title: "CUDA Tile IR, cuTile Python"
+title: "CUDA Tile IR과 cuTile Python: SIMT를 넘어서"
 slug: "cuda-tile"
 date: "2026-01-12"
 categories:

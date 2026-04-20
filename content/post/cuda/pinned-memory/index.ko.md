@@ -1,5 +1,5 @@
 ---
-title: "Pageable vs. pinned data transfer"
+title: "CUDA Pinned vs Pageable Memory: 더 빠른 Host-Device 전송"
 slug: "pinned-memory"
 date: "2025-06-19"
 draft: false
