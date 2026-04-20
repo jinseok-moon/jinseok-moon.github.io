@@ -1,0 +1,36 @@
+# Jinseok Moon
+
+> Personal blog by Jinseok Moon, a GPU software engineer. Posts focus on CUDA, GPU performance engineering, kernel optimization, and how things work under the hood. Articles are originally written in Korean and translated to English with AI assistance; both versions are published.
+
+The site is built with Hugo (Stack theme) and serves content in two languages:
+- English (default): `https://jinseok-moon.github.io/p/<slug>/`
+- Korean: `https://jinseok-moon.github.io/ko/p/<slug>/`
+
+Topics covered:
+- CUDA kernel optimization (memory, tiling, occupancy)
+- GPU architecture (Ampere, Hopper, Blackwell)
+- Linear algebra and GEMM fundamentals
+- Practical performance debugging and benchmarking
+- Triton, cuTile, and modern GPU programming models
+
+## Posts
+
+- [GEMM Optimization](https://jinseok-moon.github.io/p/gemm/) ([ko](https://jinseok-moon.github.io/ko/p/gemm/)): Step-by-step CUDA GEMM kernel optimization, building intuition for tiling, shared memory, and occupancy.
+- [CUDA Tile IR, cuTile Python](https://jinseok-moon.github.io/p/cuda-tile/) ([ko](https://jinseok-moon.github.io/ko/p/cuda-tile/)): Introduction to CUDA Tile IR and the cuTile Python programming model as an evolution beyond traditional SIMT CUDA C++.
+- [GPU architecture w/ LLM](https://jinseok-moon.github.io/p/archs/) ([ko](https://jinseok-moon.github.io/ko/p/archs/)): Generation-by-generation comparison of NVIDIA GPU features (A100, H100, Blackwell) relevant to LLM inference and training.
+- [Proper thread indexing and memory coalescing](https://jinseok-moon.github.io/p/thread-indexing/) ([ko](https://jinseok-moon.github.io/ko/p/thread-indexing/)): Why linear thread index `(x + y*Dx + z*Dx*Dy)` is the right default for CUDA blocks, and how it relates to memory coalescing.
+- [Online softmax](https://jinseok-moon.github.io/p/online-softmax/) ([ko](https://jinseok-moon.github.io/ko/p/online-softmax/)): Derivation and implementation of the online (streaming) softmax algorithm used in FlashAttention.
+- [Triton kernel linking with CUDA C++](https://jinseok-moon.github.io/p/triton-kernel-link/) ([ko](https://jinseok-moon.github.io/ko/p/triton-kernel-link/)): How to AOT-compile a Triton kernel and link the resulting object into a CUDA C++ host program.
+- [Pageable vs. pinned data transfer](https://jinseok-moon.github.io/p/pinned-memory/) ([ko](https://jinseok-moon.github.io/ko/p/pinned-memory/)): Why pinned (page-locked) host memory is faster for `cudaMemcpy` and how the pageable path adds an extra staging copy.
+- [Shared memory: bank conflicts](https://jinseok-moon.github.io/p/bank-conflict/) ([ko](https://jinseok-moon.github.io/ko/p/bank-conflict/)): What shared-memory bank conflicts are, when they happen within a warp, and how to avoid them.
+
+## About
+
+- [About the author](https://jinseok-moon.github.io/about/) ([ko](https://jinseok-moon.github.io/ko/about/))
+- [Archives](https://jinseok-moon.github.io/archives/)
+- GitHub: https://github.com/jinseok-moon
+- LinkedIn: https://www.linkedin.com/in/jinseok-moon
+
+## License
+
+All articles are licensed under CC BY-NC-SA 4.0.

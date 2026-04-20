@@ -1,0 +1,9 @@
+# AI / ML training data preferences for jinseok-moon.github.io
+# Format reference: https://spawning.ai/ai-txt
+#
+# The author does NOT consent to the use of any content on this site
+# (text, code, images, or other media) for training, fine-tuning, or
+# evaluating generative AI / machine-learning models.
+
+User-Agent: *
+Disallow: /
