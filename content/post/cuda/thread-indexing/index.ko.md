@@ -8,7 +8,8 @@ categories:
 showToc: true
 ---
 
-## Proper Thread Indexing and Memory Coalescing
+3D 블록에서 `threadIdx`의 x/y/z 순서를 마음대로 바꿔도 괜찮아 보이지만, 이것만으로도 memory coalescing이 깨져서 커널의 실효 대역폭이 크게 떨어진다. 이 글에서는 3D 블록의 선형 스레드 인덱스를 왜 $(x + y \cdot D_x + z \cdot D_x \cdot D_y)$ 로 계산해야 하는지, 그리고 이를 무시했을 때 실제로 얼마만큼 느려지는지 간단한 vector add 커널로 측정해본다.
+
 CUDA는 아래 그림과 같은 Grid - Block - Thread 의 논리적 계층구조를 사용한다. 블록 내부의 thread 는 3차원으로 구성할 수 있는데, 결론을 먼저 말하면 별다른 메모리 구조를 가지지 않는 한, _스레드 인덱스 (x, y, z) 는  (x + y Dx + z Dx Dy) 로 계산하라_ 이다. 왜 그런지 알아보자.
 
 ![](images/image.png)

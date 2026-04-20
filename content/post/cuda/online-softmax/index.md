@@ -8,6 +8,8 @@ categories:
 showToc: true
 ---
 
+Standard softmax needs two passes over the input—one to find the max for numerical stability, one to compute the normalized exponentials—which is exactly the bottleneck that FlashAttention removes. Online softmax fuses both passes into a single streaming update; this post derives the update rule from safe softmax and then shows how it becomes the core of FlashAttention.
+
 ## Original softmax
 
 $$

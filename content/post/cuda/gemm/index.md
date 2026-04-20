@@ -11,9 +11,7 @@ tags:
 showToc: true
 ---
 
-This post is my study notes based on the excellent [worklog](https://siboehm.com/articles/22/CUDA-MMM). I rewrote the kernels and diagrams myself while following along.
- 
-CUDA provides highly optimized GEMM APIs in cuBLAS, but with enough care we can write custom kernels that approach cuBLAS performance. Below, we will gradually apply core CUDA optimization ideas to a simple GEMM kernel.
+A naive CUDA GEMM runs orders of magnitude slower than cuBLAS, but a sequence of classic optimizations—memory coalescing, shared-memory tiling, register blocking, vectorized loads—can close most of the gap. This post walks through that progression on SGEMM, step by step, with kernels and diagrams I rewrote myself while following along with Simon Boehm's excellent [CUDA MMM worklog](https://siboehm.com/articles/22/CUDA-MMM).
 
 - A: (M, K), row-major
 - B: (K, N), row-major

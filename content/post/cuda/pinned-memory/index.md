@@ -11,6 +11,8 @@ draft: false
 
 ---
 
+Host-to-device copies often look like a trivial `cudaMemcpy`, but the hidden staging step through pageable memory can cut your effective bandwidth in half. This post shows, with a 1 GB benchmark, why pinned (page-locked) memory via `cudaMallocHost` is meaningfully faster and when the trade-off is worth it.
+
 In CUDA, one common way to copy memory from the host to the device is via the `cudaMemcpy` API. By default, memory you allocate on the host without any special handling is *pageable* memory. To copy data from pageable host memory to the device, the driver first has to move it into an internal pinned buffer, which introduces extra overhead and slows the transfer down.
 
 If you explicitly allocate host memory with `cudaMallocHost`, you get pinned (page-locked) memory directly. In that case, the intermediate copy step is skippedand transfers can proceed faster. For example, when copying 1 GB of memory to the device, the performance difference between the two approaches looks like this:

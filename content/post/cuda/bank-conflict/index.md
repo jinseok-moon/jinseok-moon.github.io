@@ -8,8 +8,10 @@ categories:
 showToc: true
 ---
 
+Many CUDA kernels hit a performance ceiling not because of arithmetic, but because of inefficient shared-memory access patterns. In this post I'll show exactly when shared-memory bank conflicts occur within a warp, why they serialize your loads, and how to eliminate them with padding or swizzled layouts.
+
 ## Bank Conflicts
-When you study CUDA, you naturally end up studying shared memoryand along the way you will encounter `bank conflicts`. A bank conflict occurs when multiple memory requests from a warp are mapped to the same memory bank at the same time.
+When you study CUDA, you naturally end up studying shared memory, and along the way you will encounter `bank conflicts`. A bank conflict occurs when multiple memory requests from a warp are mapped to the same memory bank at the same time.
 
 ![](images/image.png)
 

@@ -7,7 +7,9 @@ categories:
 draft: false
 ---
 
-## Until now 
+NVIDIA는 GPU 세대가 바뀌어도 SIMT 레벨을 다시 짜지 않고도 성능을 유지할 수 있도록 CUDA를 tile-first 프로그래밍 모델로 옮겨가고 있다. 이 글에서는 새로 공개된 CUDA Tile IR과 cuTile Python이 무엇인지, 기존 CUDA C++과 어떻게 나란히 존재하는지, 그리고 새로운 컴파일 경로가 어떤 모양인지 살펴본다.
+
+## Until now
 기존의 CUDA 프로그래밍은 CUDA C++을 바탕으로 하고 있었다. SIMT 기반으로 데이터를 블록과 스레드에 맵핑해줄 필요가 있다. 세밀한 설계를 통해 최선의 성능을 이끌어 낼 수 있으나, 모두가 손쉽게 할 수 있지는 않은 일이다. 또한 GPU 아키텍쳐가 발전함에 따라서 하드웨어 스펙도 달라지니 커널 개발자는 각 GPU에 맞는 최선의 커널을 다르게 개발해야했다. 
 
 이런 어려움에 대해 떠오른 것이 triton-language다([NVIDIA Triton Inference Server와는 관계가 없다](https://github.com/triton-lang/triton/issues/156)). Triton은 메모리관리, 동기화, 텐서코어 스케쥴링 등 블록 레벨의 추상화를 통해 접근성을 높였다. 이에 더해 MLIR을 통해 NVIDIA GPU뿐 아니라 AMD, NPU 등 다양한 하드웨어 백엔드로 이어질 수 있는 수단으로 확장된 추세이다.

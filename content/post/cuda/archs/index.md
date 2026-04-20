@@ -11,8 +11,7 @@ tags:
 showToc: true
 ---
 
-GPU architectures have evolved over many generations and their features have changed accordingly. If you work with LLMs, it is especially useful to understand the hardware characteristics starting from Ampere.
-In this post we will look at representative GPUs for each architecture—A100, H100 and Blackwell—without focusing on raw numbers like TOPS from Tensor Cores.
+NVIDIA GPU architectures have changed significantly each generation, and for anyone working with LLMs these hardware details directly shape how kernels are written. This post compares A100 (Ampere), H100 (Hopper), and Blackwell from a practical kernel-developer perspective—focusing on features that matter for LLM workloads rather than on raw Tensor Core TOPS.
 
 ## A100: Ampere (SM80, 2020)
 Released in 2020, A100 introduced an L1‑bypass path that optimizes copies from DRAM to shared memory (SRAM) by skipping several intermediate stages.

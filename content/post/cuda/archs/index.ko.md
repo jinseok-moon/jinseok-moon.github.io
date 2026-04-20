@@ -10,8 +10,7 @@ draft: false
 
 date: 2025-11-24
 ---
-GPU는 계속 세대가 발전했고, 그에 따라서 feature들이 바뀌었다. LLM을 다룰것이라면 Ampere 부터의 GPU의 하드웨어적 특성을 알면 좋다.
-A100, H100 등 각 아키텍쳐의 대표적인 GPU를 통해 알아보자. 텐서코어의 TOPS 같은 성능수치는 다루지 않는다.
+NVIDIA GPU는 세대마다 아키텍처가 크게 달라져 왔고, LLM을 다루는 입장에서는 이런 하드웨어 디테일이 커널 작성 방식에 직접적인 영향을 준다. 이 글에서는 A100 (Ampere), H100 (Hopper), Blackwell 을 커널 개발자 관점에서 비교한다. Tensor Core TOPS 같은 숫자보다 실제 LLM 워크로드에 영향을 주는 feature 중심으로 살펴본다.
 
 ## A100: Ampere (SM80, 2020)
 2020년 발표된 GPU로, L1 bypass를 통해서 많은 과정이 생략되면서 DRAM의 값을 Shared Memory (SRAM)에 불러오는 것이 최적화되었다. 

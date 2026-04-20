@@ -8,7 +8,9 @@ categories:
 showToc: true
 ---
 
-CUDA exposes a logical hierarchy of grid → block → thread, as shown in the figure below. Threads inside a block can be arranged in three dimensions. The key takeaway is: unless you have a very specific memory layout, **compute the linear thread index from (x, y, z) as $(x + y \cdot D_x + z \cdot D_x \cdot D_y)$**. Let’s see why.
+Swapping the x/y/z order of `threadIdx` feels harmless, but it can silently destroy memory coalescing and tank your kernel's effective bandwidth. This post shows why the linear thread index for a 3D block should be $(x + y \cdot D_x + z \cdot D_x \cdot D_y)$, and uses a simple vector-add kernel to measure the cost of getting it wrong.
+
+CUDA exposes a logical hierarchy of grid → block → thread, as shown in the figure below. Threads inside a block can be arranged in three dimensions. The key takeaway is: unless you have a very specific memory layout, **compute the linear thread index from (x, y, z) as $(x + y \cdot D_x + z \cdot D_x \cdot D_y)$**. Let's see why.
 
 ![](images/image.png)
 

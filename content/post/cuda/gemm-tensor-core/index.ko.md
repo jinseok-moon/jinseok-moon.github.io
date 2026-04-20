@@ -1,16 +1,19 @@
 ---
-title: "GEMM 1"
-slug: "gemm-1"
+title: "Tensor Core로 CUDA GEMM 가속하기: WMMA API와 bf16"
+slug: "gemm-tensor-core"
 date: "2026-04-19"
 draft: true
 categories:
   - cuda
+tags:
+  - cuda
+  - nvidia
+  - tensor-core
+  - gemm
 showToc: true
 ---
 
-앞의 글들에서는 CUDA core 를 활용한 연산을 다루었다. 하지만 이것만으로는 아직 완벽하지 않다.
-GPU에는 `텐서코어`가 존재하기 때문이다. 텐서코어는 쉽게 말하면 행렬곱가속기다.
-하나씩 차츰 다루어가보도록 하자.
+CUDA 코어만으로 작성한 GEMM도 [이전 글](/ko/p/gemm/)에서처럼 cuBLAS 급까지 최적화할 수 있지만, 최신 GPU의 피크 성능을 끌어내려면 결국 Tensor Core를 써야 한다. 이 글에서는 Tensor Core에 데이터를 올리는 가장 기본적인 API인 `wmma`를 활용해, bf16 입력·fp32 accumulator 구성의 GEMM 커널을 단계별로 작성하고 벤치마크까지 비교해본다.
 
 ## 0. Baseline
 이건 fp32에서 다루었던 가장 기본적인 커널이다. 다만 입력의 데이터 타입이 bf16이 되었다.

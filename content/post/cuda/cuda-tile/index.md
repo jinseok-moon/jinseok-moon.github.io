@@ -7,6 +7,8 @@ categories:
 draft: false
 ---
 
+NVIDIA is shifting CUDA toward a tile-first programming model so kernels can stay performant across GPU generations without rewriting SIMT-level code. This post walks through the new CUDA Tile IR and the cuTile Python frontend—what they are, how they sit next to traditional CUDA C++, and what the resulting compile path looks like.
+
 ## Until now
 Traditional CUDA programming has been based on CUDA C++. It requires mapping data to blocks and threads based on SIMT. While careful design can achieve optimal performance, it's not something everyone can easily do. Additionally, as GPU architectures evolve, hardware specifications change, so kernel developers had to develop different optimal kernels for each GPU.
 

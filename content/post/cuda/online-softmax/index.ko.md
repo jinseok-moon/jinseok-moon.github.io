@@ -8,6 +8,8 @@ categories:
 showToc: true
 ---
 
+일반적인 Softmax는 수치 안정성을 위해 최대값을 구하는 패스와, 정규화된 지수를 계산하는 패스, 총 두 번의 입력 순회가 필요한데 바로 이 부분이 FlashAttention이 없애버린 병목이다. Online Softmax는 이 두 패스를 하나의 스트리밍 업데이트로 합친 것으로, 이 글에서는 Safe Softmax에서 출발해 업데이트 식을 유도하고, 그것이 어떻게 FlashAttention의 핵심이 되는지까지 다룬다.
+
 ## Original softmax
 $$
 \sigma_i(\mathbf{z}) = \frac{e^{z_i}}{\sum^K_{j=1}e^{z_j}}

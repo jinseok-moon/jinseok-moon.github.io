@@ -8,8 +8,10 @@ categories:
 showToc: true
 ---
 
+많은 CUDA 커널이 연산량이 아니라 Shared Memory 접근 패턴 때문에 성능의 벽에 부딪힌다. 이 글에서는 warp 내부에서 Bank Conflict가 언제 발생하고 왜 메모리 접근을 직렬화시키는지, 그리고 padding이나 swizzle 레이아웃으로 어떻게 제거하는지 살펴본다.
+
 ## Bank Conflicts
-CUDA를 공부하면 Shared Memory를 공부하게 되고 그러면서 `Bank Conflicts`에 대해서도 다루게 된다. Bank Conflicts는 메모리 요청이 뱅크에 중복되게 일어날 때 발생하는 것을 나타낸다.
+CUDA를 공부하면 Shared Memory를 공부하게 되고, 그러면서 `Bank Conflicts`에 대해서도 다루게 된다. Bank Conflicts는 메모리 요청이 뱅크에 중복되게 일어날 때 발생하는 것을 나타낸다.
 
 ![](images/image.png)
 

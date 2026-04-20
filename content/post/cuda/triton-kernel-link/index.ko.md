@@ -8,7 +8,9 @@ categories:
 showToc: true
 ---
 
-Python에서 triton 언어를 활용해서 triton 함수를 정의해준다. triton 함수는 `@triton.jit` decorator 형태로 정의됨. Triton의 컴파일 과정은 다른 포스트에서 따로 다루는걸로..
+Triton은 Python에서 GPU 커널을 간결하게 짤 수 있어 편리하지만, 실제 CUDA C++ 프로젝트에서는 JIT이 아니라 AOT로 컴파일해 다른 오브젝트 파일처럼 링크해 쓰고 싶은 경우가 많다. 이 글에서는 Triton 커널을 AOT 컴파일하고, C 헤더를 생성한 뒤, CUDA C++ 호스트 프로그램에 링크해서 호출하는 과정을 처음부터 끝까지 따라간다.
+
+Python에서 triton 언어를 활용해서 triton 함수를 정의해준다. triton 함수는 `@triton.jit` decorator 형태로 정의한다. Triton의 컴파일 과정은 다른 포스트에서 따로 다룬다.
 
 ```python
 @triton.jit

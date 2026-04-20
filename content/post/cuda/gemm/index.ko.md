@@ -8,9 +8,7 @@ categories:
 showToc: true
 ---
 
-이 글은 [포스트](https://siboehm.com/articles/22/CUDA-MMM)를  참고하며 직접 커널과 그림을 작성하며 진행한 공부이다.
-
-CUDA는 cuBLAS에서 최적화된 GEMM api를 제공한다. 직접 작성한 커널도 최적화를 통해서 충분히 cuBLAS 급의 성능을 낼 수 있다. 단계적으로 CUDA의 최적화 개념들을 적용하면서 따라가보자.
+직접 작성한 CUDA GEMM은 기본 구현만으로는 cuBLAS보다 수십 배 느리지만, memory coalescing → Shared Memory tiling → register blocking → vectorized load 같은 고전적인 최적화를 단계별로 적용하면 cuBLAS 급까지 따라잡을 수 있다. 이 글은 SGEMM을 기준으로 그 과정을 하나씩 쌓아가며, Simon Boehm의 훌륭한 [CUDA MMM 워크로그](https://siboehm.com/articles/22/CUDA-MMM)를 참고해 직접 커널과 그림을 다시 그려가면서 정리한 기록이다.
 
 - A: (M, K), row-major
 - B: (K, N), row-major

@@ -8,6 +8,8 @@ categories:
 showToc: true
 ---
 
+Triton is great for writing portable GPU kernels in Python, but in a production CUDA C++ project you often need the kernel to be ahead-of-time compiled and linkable like any other object file. This post shows how to AOT-compile a Triton kernel, generate the C header, and link the resulting object into a CUDA C++ host program end to end.
+
 First, we define a Triton kernel in Python using the Triton language. A Triton kernel is declared with the `@triton.jit` decorator. (The full Triton compilation pipeline will be covered in another post.)
 
 ```python
